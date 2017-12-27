@@ -2,9 +2,11 @@
   "name": "react-ssr",
   "version": "1.0.0",
   "description": "Server side rendering project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev:build:server": "webpack --config webpack.server.js"
+    "dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
+    "dev:build:server": "webpack --config webpack.server.js --watch",
+    "dev:build:client": "webpack --config webpack.client.js --watch"
   },
   "author": "",
   "license": "ISC",

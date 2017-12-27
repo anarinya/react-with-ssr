@@ -6967,22 +6967,35 @@ module.exports = memoizeStringOnly;
 "use strict";
 
 
-var express = __webpack_require__(52);
-var React = __webpack_require__(20);
-var renderToString = __webpack_require__(105).renderToString;
-var Home = __webpack_require__(114).default;
+var _express = __webpack_require__(52);
+
+var _express2 = _interopRequireDefault(_express);
+
+var _react = __webpack_require__(20);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(105);
+
+var _components = __webpack_require__(114);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Setup express app
-var app = express();
+var app = (0, _express2.default)();
+
+// Allow outside access to public dir
+app.use(_express2.default.static('public'));
 
 // Setup routes
 app.get('/', function (req, res) {
-  var content = renderToString(React.createElement(Home, null));
-  res.send(content);
+  var content = (0, _server.renderToString)(_react2.default.createElement(_components.Home, null));
+  var html = '\n    <html>\n      <head></head>\n      <body>\n        <div>' + content + '</div>\n        <script src="bundle.js"></script>\n      </body>\n    </html>\n  ';
+  res.send(html);
 });
 
-app.listen(3000, function () {
-  console.log('Listening on port 3000.');
+app.listen(4444, function () {
+  console.log('Listening on port 4444.');
 });
 
 /***/ }),
@@ -21924,6 +21937,26 @@ module.exports = camelize;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Home = undefined;
+
+var _Home = __webpack_require__(115);
+
+var _Home2 = _interopRequireDefault(_Home);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.Home = _Home2.default;
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _react = __webpack_require__(20);
 
@@ -21935,7 +21968,18 @@ var Home = function Home() {
   return _react2.default.createElement(
     'div',
     null,
-    'I\'m the home component!'
+    _react2.default.createElement(
+      'div',
+      null,
+      'I\'m the home component! Hello'
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          return console.log('Hi, there!');
+        } },
+      'Press me!'
+    )
   );
 };
 
