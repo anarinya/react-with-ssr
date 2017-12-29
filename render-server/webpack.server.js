@@ -7,7 +7,7 @@ const config = {
   // Inform webpack we're building a bundle for node, rather than the browser
   target: 'node',
   // Tell webpack root file of our server app
-  entry: './src/server.js',
+  entry: './src/server/index.js',
   // Tell webpack where to put output file generated
   output: {
     filename: 'bundle.js',

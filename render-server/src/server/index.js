@@ -9,7 +9,7 @@ app.use(express.static('public'));
 
 // Setup routes
 app.get('/', (req, res) => {
-  res.send(renderer());
+  res.send(renderer(req));
 });
 
 app.listen(4444, () => {
