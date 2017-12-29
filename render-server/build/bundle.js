@@ -80,13 +80,7 @@ var _express = __webpack_require__(2);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _server = __webpack_require__(3);
-
-var _components = __webpack_require__(4);
+var _helpers = __webpack_require__(6);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -98,9 +92,7 @@ app.use(_express2.default.static('public'));
 
 // Setup routes
 app.get('/', function (req, res) {
-  var content = (0, _server.renderToString)(_react2.default.createElement(_components.Home, null));
-  var html = '\n    <html>\n      <head></head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script src="bundle.js"></script>\n      </body>\n    </html>\n  ';
-  res.send(html);
+  res.send((0, _helpers.renderer)());
 });
 
 app.listen(4444, function () {
@@ -176,6 +168,52 @@ var Home = function Home() {
 };
 
 exports.default = Home;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderer = undefined;
+
+var _renderer = __webpack_require__(7);
+
+var _renderer2 = _interopRequireDefault(_renderer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.renderer = _renderer2.default;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(3);
+
+var _components = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  var content = (0, _server.renderToString)(_react2.default.createElement(_components.Home, null));
+  return '\n    <html>\n      <head></head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script src="bundle.js"></script>\n      </body>\n    </html>\n  ';
+};
 
 /***/ })
 /******/ ]);
