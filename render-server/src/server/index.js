@@ -1,5 +1,5 @@
 import express from 'express';
-import { renderer } from './helpers';
+import { renderer, createStore } from './helpers';
 
 // Setup express app
 const app = express();
@@ -8,8 +8,12 @@ const app = express();
 app.use(express.static('public'));
 
 // Setup routes
-app.get('/', (req, res) => {
-  res.send(renderer(req));
+app.get('*', (req, res) => {
+  const store = createStore();
+
+  // Some logic to initialize and load data into the store
+
+  res.send(renderer(req, store));
 });
 
 app.listen(4444, () => {
