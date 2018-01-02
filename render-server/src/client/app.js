@@ -1,13 +1,16 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
-import { Header } from './components';
+import { Header, Footer } from './components';
 import { fetchCurrentUser } from './actions';
 
 const App = ({ route }) => {
   return (
-    <div>
+    <div id="app" style={{ minHeight: "100%", display: "flex", flexDirection: "column" }}>
       <Header />
-      {renderRoutes(route.routes)}
+      <main style={{ flex: "1 0 auto" }}>
+        {renderRoutes(route.routes)}
+      </main>
+      <Footer />
     </div>
   );
 };

@@ -39043,18 +39043,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var HomePage = function HomePage() {
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'center-align', style: { marginTop: '200' } },
     _react2.default.createElement(
-      'div',
-      null,
-      'I\'m the home component! Hello'
+      'h2',
+      { className: 'grey-text text-darken-4' },
+      'Welcome'
     ),
     _react2.default.createElement(
-      'button',
-      { onClick: function onClick() {
-          return console.log('Hi, there!');
-        } },
-      'Press me!'
+      'p',
+      { className: 'white-text flow-text' },
+      'This is a demo application for server-side rendered react'
     )
   );
 };
@@ -39114,9 +39112,26 @@ var UsersPage = function (_Component) {
             name = _ref.name;
 
         return _react2.default.createElement(
-          'li',
-          { key: id },
-          name
+          'div',
+          { className: 'col s12 m6 l6 xl4', key: id },
+          _react2.default.createElement(
+            'div',
+            { className: 'card' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-content center-align' },
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons large' },
+                'person'
+              ),
+              _react2.default.createElement(
+                'span',
+                { className: 'card-title' },
+                name
+              )
+            )
+          )
         );
       });
     }
@@ -39125,12 +39140,20 @@ var UsersPage = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
-        'Here\'s a list of users:',
+        { className: 'container' },
         _react2.default.createElement(
-          'ul',
-          null,
-          this.renderUsers()
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'h4',
+            null,
+            'Users'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            this.renderUsers()
+          )
         )
       );
     }
@@ -39178,9 +39201,14 @@ var App = function App(_ref) {
 
   return _react2.default.createElement(
     'div',
-    null,
+    { id: 'app', style: { minHeight: "100%", display: "flex", flexDirection: "column" } },
     _react2.default.createElement(_components.Header, null),
-    (0, _reactRouterConfig.renderRoutes)(route.routes)
+    _react2.default.createElement(
+      'main',
+      { style: { flex: "1 0 auto" } },
+      (0, _reactRouterConfig.renderRoutes)(route.routes)
+    ),
+    _react2.default.createElement(_components.Footer, null)
   );
 };
 
@@ -39202,15 +39230,20 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Header = undefined;
+exports.Footer = exports.Header = undefined;
 
 var _header = __webpack_require__(484);
 
 var _header2 = _interopRequireDefault(_header);
 
+var _footer = __webpack_require__(485);
+
+var _footer2 = _interopRequireDefault(_footer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Header = _header2.default;
+exports.Footer = _footer2.default;
 
 /***/ }),
 /* 484 */
@@ -39252,30 +39285,50 @@ var Header = function Header(_ref) {
       btnText = _ref2.btnText;
 
   return _react2.default.createElement(
-    'div',
+    'header',
     null,
     _react2.default.createElement(
-      _reactRouterDom.Link,
-      { to: '/' },
-      'React SSR'
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
+      'nav',
+      { className: 'blue z-depth-0' },
       _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: '/users' },
-        'Users'
-      ),
-      _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: '/admins' },
-        'Admins'
-      ),
-      _react2.default.createElement(
-        'a',
-        { href: btnPath },
-        btnText
+        'div',
+        { className: 'nav-wrapper' },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/', className: 'brand-logo left', style: { marginLeft: 20, fontSize: "1.2em" } },
+          'React SSR'
+        ),
+        _react2.default.createElement(
+          'ul',
+          { className: 'right' },
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/users' },
+              'Users'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/admins' },
+              'Admins'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'a',
+              { className: 'btn grey darken-4', href: btnPath },
+              btnText
+            )
+          )
+        )
       )
     )
   );
@@ -39285,6 +39338,64 @@ exports.default = (0, _reactRedux.connect)(function (_ref3) {
   var auth = _ref3.auth;
   return { auth: auth };
 })(Header);
+
+/***/ }),
+/* 485 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+  return _react2.default.createElement(
+    "footer",
+    { className: "page-footer grey darken-4" },
+    _react2.default.createElement(
+      "div",
+      { className: "footer-copyright" },
+      _react2.default.createElement(
+        "div",
+        { className: "row" },
+        _react2.default.createElement(
+          "div",
+          { className: "col s12" },
+          _react2.default.createElement(
+            "div",
+            { className: "white-text" },
+            _react2.default.createElement(
+              "span",
+              null,
+              "made with ",
+              _react2.default.createElement(
+                "i",
+                { className: "material-icons tiny pink-text accent-3" },
+                "favorite"
+              ),
+              " by ",
+              _react2.default.createElement(
+                "a",
+                { target: "_blank", href: "https://github.com/anarinya/react-with-ssr" },
+                "anarinya"
+              )
+            )
+          )
+        )
+      )
+    )
+  );
+};
+
+exports.default = Footer;
 
 /***/ })
 /******/ ]);

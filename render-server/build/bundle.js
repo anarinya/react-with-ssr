@@ -306,7 +306,7 @@ var _renderer = __webpack_require__(12);
 
 var _renderer2 = _interopRequireDefault(_renderer);
 
-var _createStore = __webpack_require__(21);
+var _createStore = __webpack_require__(22);
 
 var _createStore2 = _interopRequireDefault(_createStore);
 
@@ -363,7 +363,7 @@ exports.default = function (req, store) {
     )
   ));
 
-  return '\n    <html>\n      <head></head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>\n          window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n        </script>\n        <script src="bundle.js"></script>\n      </body>\n    </html>\n  ';
+  return '\n    <html>\n      <head>\n        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">\n        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">\n        <style> html { height: 100%; }</style>\n      </head>\n      <body class="blue">\n        <div id="root">' + content + '</div>\n        <script>\n          window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n        </script>\n        <script src="bundle.js"></script>\n      </body>\n    </html>\n  ';
 };
 
 /***/ }),
@@ -423,18 +423,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var HomePage = function HomePage() {
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'center-align', style: { marginTop: '200' } },
     _react2.default.createElement(
-      'div',
-      null,
-      'I\'m the home component! Hello'
+      'h2',
+      { className: 'grey-text text-darken-4' },
+      'Welcome'
     ),
     _react2.default.createElement(
-      'button',
-      { onClick: function onClick() {
-          return console.log('Hi, there!');
-        } },
-      'Press me!'
+      'p',
+      { className: 'white-text flow-text' },
+      'This is a demo application for server-side rendered react'
     )
   );
 };
@@ -494,9 +492,26 @@ var UsersPage = function (_Component) {
             name = _ref.name;
 
         return _react2.default.createElement(
-          'li',
-          { key: id },
-          name
+          'div',
+          { className: 'col s12 m6 l6 xl4', key: id },
+          _react2.default.createElement(
+            'div',
+            { className: 'card' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-content center-align' },
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons large' },
+                'person'
+              ),
+              _react2.default.createElement(
+                'span',
+                { className: 'card-title' },
+                name
+              )
+            )
+          )
         );
       });
     }
@@ -505,12 +520,20 @@ var UsersPage = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
-        'Here\'s a list of users:',
+        { className: 'container' },
         _react2.default.createElement(
-          'ul',
-          null,
-          this.renderUsers()
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'h4',
+            null,
+            'Users'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            this.renderUsers()
+          )
         )
       );
     }
@@ -558,9 +581,14 @@ var App = function App(_ref) {
 
   return _react2.default.createElement(
     'div',
-    null,
+    { id: 'app', style: { minHeight: "100%", display: "flex", flexDirection: "column" } },
     _react2.default.createElement(_components.Header, null),
-    (0, _reactRouterConfig.renderRoutes)(route.routes)
+    _react2.default.createElement(
+      'main',
+      { style: { flex: "1 0 auto" } },
+      (0, _reactRouterConfig.renderRoutes)(route.routes)
+    ),
+    _react2.default.createElement(_components.Footer, null)
   );
 };
 
@@ -582,15 +610,20 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Header = undefined;
+exports.Footer = exports.Header = undefined;
 
 var _header = __webpack_require__(20);
 
 var _header2 = _interopRequireDefault(_header);
 
+var _footer = __webpack_require__(21);
+
+var _footer2 = _interopRequireDefault(_footer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Header = _header2.default;
+exports.Footer = _footer2.default;
 
 /***/ }),
 /* 20 */
@@ -632,30 +665,50 @@ var Header = function Header(_ref) {
       btnText = _ref2.btnText;
 
   return _react2.default.createElement(
-    'div',
+    'header',
     null,
     _react2.default.createElement(
-      _reactRouterDom.Link,
-      { to: '/' },
-      'React SSR'
-    ),
-    _react2.default.createElement(
-      'div',
-      null,
+      'nav',
+      { className: 'blue z-depth-0' },
       _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: '/users' },
-        'Users'
-      ),
-      _react2.default.createElement(
-        _reactRouterDom.Link,
-        { to: '/admins' },
-        'Admins'
-      ),
-      _react2.default.createElement(
-        'a',
-        { href: btnPath },
-        btnText
+        'div',
+        { className: 'nav-wrapper' },
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/', className: 'brand-logo left', style: { marginLeft: 20, fontSize: "1.2em" } },
+          'React SSR'
+        ),
+        _react2.default.createElement(
+          'ul',
+          { className: 'right' },
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/users' },
+              'Users'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/admins' },
+              'Admins'
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'a',
+              { className: 'btn grey darken-4', href: btnPath },
+              btnText
+            )
+          )
+        )
       )
     )
   );
@@ -677,17 +730,75 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Footer = function Footer() {
+  return _react2.default.createElement(
+    "footer",
+    { className: "page-footer grey darken-4" },
+    _react2.default.createElement(
+      "div",
+      { className: "footer-copyright" },
+      _react2.default.createElement(
+        "div",
+        { className: "row" },
+        _react2.default.createElement(
+          "div",
+          { className: "col s12" },
+          _react2.default.createElement(
+            "div",
+            { className: "white-text" },
+            _react2.default.createElement(
+              "span",
+              null,
+              "made with ",
+              _react2.default.createElement(
+                "i",
+                { className: "material-icons tiny pink-text accent-3" },
+                "favorite"
+              ),
+              " by ",
+              _react2.default.createElement(
+                "a",
+                { target: "_blank", href: "https://github.com/anarinya/react-with-ssr" },
+                "anarinya"
+              )
+            )
+          )
+        )
+      )
+    )
+  );
+};
+
+exports.default = Footer;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _redux = __webpack_require__(6);
 
-var _reduxThunk = __webpack_require__(22);
+var _reduxThunk = __webpack_require__(23);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _axios = __webpack_require__(23);
+var _axios = __webpack_require__(24);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _reducers = __webpack_require__(24);
+var _reducers = __webpack_require__(25);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -706,19 +817,19 @@ exports.default = function (req) {
 };
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("redux-thunk");
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -730,11 +841,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(6);
 
-var _usersReducer = __webpack_require__(25);
+var _usersReducer = __webpack_require__(26);
 
 var _usersReducer2 = _interopRequireDefault(_usersReducer);
 
-var _authReducer = __webpack_require__(26);
+var _authReducer = __webpack_require__(27);
 
 var _authReducer2 = _interopRequireDefault(_authReducer);
 
@@ -746,7 +857,7 @@ exports.default = (0, _redux.combineReducers)({
 });
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -771,7 +882,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

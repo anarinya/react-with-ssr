@@ -9,15 +9,28 @@ class UsersPage extends Component {
 
   renderUsers() {
     return this.props.users.map(({ id, name }) => {
-      return <li key={id}>{name}</li>
+      return (
+        <div className="col s12 m6 l6 xl4" key={id}>
+          <div className="card">
+            <div className="card-content center-align">
+              <i className="material-icons large">person</i>
+              <span className="card-title">{name}</span>
+            </div>
+          </div>
+        </div>
+      );
     });
   }
 
   render() {
     return (
-      <div>
-        Here's a list of users:
-        <ul>{this.renderUsers()}</ul>
+      <div className="container">
+        <div className="row">
+        <h4>Users</h4>
+        <div className="row">
+          {this.renderUsers()}
+        </div>
+        </div>
       </div>
     );
   }
