@@ -13,7 +13,7 @@ app.use('/api',
   proxy('http://react-ssr-api.herokuapp.com', {
     // Handle potential security errors with google oauth flow to API server
     proxyReqOptDecorator(opts) {
-      opts.header['x-forwarded-host'] = 'localhost:3000';
+      opts.headersg['x-forwarded-host'] = 'localhost:3000';
       return opts;
     }
   })
@@ -24,7 +24,7 @@ app.use(express.static('public'));
 
 // Setup routes
 app.get('*', (req, res) => {
-  const store = createStore();
+  const store = createStore(req);
 
   const promises = matchRoutes(routes, req.path).map(({ route }) => {
     return route.loadData ? route.loadData(store) : null;
