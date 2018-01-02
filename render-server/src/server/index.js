@@ -13,7 +13,7 @@ app.use('/api',
   proxy('http://react-ssr-api.herokuapp.com', {
     // Handle potential security errors with google oauth flow to API server
     proxyReqOptDecorator(opts) {
-      opts.headersg['x-forwarded-host'] = 'localhost:3000';
+      opts.headers['x-forwarded-host'] = 'localhost:3000';
       return opts;
     }
   })
