@@ -3060,6 +3060,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 var FETCH_USERS = exports.FETCH_USERS = 'fetch_users';
 var FETCH_CURRENT_USER = exports.FETCH_CURRENT_USER = 'fetch_current_user';
+var FETCH_ADMINS = exports.FETCH_ADMINS = 'fetch_admins';
 
 var fetchUsers = exports.fetchUsers = function fetchUsers() {
   return function () {
@@ -3125,6 +3126,40 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
 
     return function (_x4, _x5, _x6) {
       return _ref2.apply(this, arguments);
+    };
+  }();
+};
+
+var fetchAdmins = exports.fetchAdmins = function fetchAdmins() {
+  return function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch, getState, api) {
+      var res;
+      return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return api.get('/admins');
+
+            case 2:
+              res = _context3.sent;
+
+
+              dispatch({
+                type: FETCH_ADMINS,
+                payload: res
+              });
+
+            case 4:
+            case 'end':
+              return _context3.stop();
+          }
+        }
+      }, _callee3, undefined);
+    }));
+
+    return function (_x7, _x8, _x9) {
+      return _ref3.apply(this, arguments);
     };
   }();
 };
@@ -38907,11 +38942,16 @@ var _authReducer = __webpack_require__(477);
 
 var _authReducer2 = _interopRequireDefault(_authReducer);
 
+var _adminsReducer = __webpack_require__(488);
+
+var _adminsReducer2 = _interopRequireDefault(_adminsReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   users: _usersReducer2.default,
-  auth: _authReducer2.default
+  auth: _authReducer2.default,
+  admins: _adminsReducer2.default
 });
 
 /***/ }),
@@ -39439,6 +39479,31 @@ var NotFoundPage = function NotFoundPage(_ref) {
 
 exports.default = {
   component: NotFoundPage
+};
+
+/***/ }),
+/* 488 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _actions = __webpack_require__(78);
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  switch (action.type) {
+    case _actions.FETCH_ADMINS:
+      return action.payload.data;
+    default:
+      return state;
+  }
 };
 
 /***/ })
