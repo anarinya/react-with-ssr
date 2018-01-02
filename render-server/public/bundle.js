@@ -39035,6 +39035,8 @@ exports.default = [_extends({}, _app2.default, {
     exact: true
   }), _extends({}, _pages.UsersListPage, {
     path: '/users'
+  }), _extends({}, _pages.AdminsListPage, {
+    path: '/admins'
   }), _extends({}, _pages.NotFoundPage)]
 })];
 
@@ -39048,7 +39050,7 @@ exports.default = [_extends({}, _app2.default, {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotFoundPage = exports.UsersListPage = exports.HomePage = undefined;
+exports.AdminsListPage = exports.NotFoundPage = exports.UsersListPage = exports.HomePage = undefined;
 
 var _homePage = __webpack_require__(480);
 
@@ -39062,11 +39064,16 @@ var _notFoundPage = __webpack_require__(487);
 
 var _notFoundPage2 = _interopRequireDefault(_notFoundPage);
 
+var _adminsListPage = __webpack_require__(489);
+
+var _adminsListPage2 = _interopRequireDefault(_adminsListPage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.HomePage = _homePage2.default;
 exports.UsersListPage = _usersListPage2.default;
 exports.NotFoundPage = _notFoundPage2.default;
+exports.AdminsListPage = _adminsListPage2.default;
 
 /***/ }),
 /* 480 */
@@ -39503,6 +39510,118 @@ exports.default = function () {
       return action.payload.data;
     default:
       return state;
+  }
+};
+
+/***/ }),
+/* 489 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(118);
+
+var _actions = __webpack_require__(78);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AdminsListPage = function (_Component) {
+  _inherits(AdminsListPage, _Component);
+
+  function AdminsListPage() {
+    _classCallCheck(this, AdminsListPage);
+
+    return _possibleConstructorReturn(this, (AdminsListPage.__proto__ || Object.getPrototypeOf(AdminsListPage)).apply(this, arguments));
+  }
+
+  _createClass(AdminsListPage, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.fetchAdmins();
+    }
+  }, {
+    key: 'renderAdmins',
+    value: function renderAdmins() {
+      return this.props.admins.map(function (_ref) {
+        var id = _ref.id,
+            name = _ref.name;
+
+        return _react2.default.createElement(
+          'div',
+          { className: 'col s12 m6 l6 xl4', key: id },
+          _react2.default.createElement(
+            'div',
+            { className: 'card' },
+            _react2.default.createElement(
+              'div',
+              { className: 'card-content center-align' },
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons large' },
+                'person'
+              ),
+              _react2.default.createElement(
+                'span',
+                { className: 'card-title' },
+                name
+              )
+            )
+          )
+        );
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'h4',
+            null,
+            'Admins'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            this.renderAdmins()
+          )
+        )
+      );
+    }
+  }]);
+
+  return AdminsListPage;
+}(_react.Component);
+
+exports.default = {
+  component: (0, _reactRedux.connect)(function (_ref2) {
+    var admins = _ref2.admins;
+    return { admins: admins };
+  }, { fetchAdmins: _actions.fetchAdmins })(AdminsListPage),
+  loadData: function loadData(_ref3) {
+    var dispatch = _ref3.dispatch;
+    return dispatch((0, _actions.fetchAdmins)());
   }
 };
 

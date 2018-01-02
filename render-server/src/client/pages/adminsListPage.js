@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUsers } from '../actions';
+import { fetchAdmins } from '../actions';
 
-class UsersPage extends Component {
+class AdminsListPage extends Component {
   componentDidMount() {
-    this.props.fetchUsers();
+    this.props.fetchAdmins();
   }
 
-  renderUsers() {
-    return this.props.users.map(({ id, name }) => {
+  renderAdmins() {
+    return this.props.admins.map(({ id, name }) => {
       return (
         <div className="col s12 m6 l6 xl4" key={id}>
           <div className="card">
@@ -26,9 +26,9 @@ class UsersPage extends Component {
     return (
       <div className="container">
         <div className="row">
-        <h4>Users</h4>
+        <h4>Admins</h4>
         <div className="row">
-          {this.renderUsers()}
+          {this.renderAdmins()}
         </div>
         </div>
       </div>
@@ -37,6 +37,6 @@ class UsersPage extends Component {
 }
 
 export default {
-  component: connect(({ users }) => ({ users }), { fetchUsers })(UsersPage),
-  loadData: ({ dispatch }) => dispatch(fetchUsers())
+  component: connect(({ admins}) => ({ admins }), { fetchAdmins })(AdminsListPage),
+  loadData: ({ dispatch }) => dispatch(fetchAdmins())
 };
