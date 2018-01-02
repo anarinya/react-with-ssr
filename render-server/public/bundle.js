@@ -38033,7 +38033,7 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
 
 var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
   return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispach, getState, api) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState, api) {
       var res;
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
@@ -39117,13 +39117,14 @@ var UsersPage = function (_Component) {
 }(_react.Component);
 
 exports.default = {
-  loadData: function loadData(store) {
-    return store.dispatch((0, _actions.fetchUsers)());
-  },
   component: (0, _reactRedux.connect)(function (_ref2) {
     var users = _ref2.users;
     return { users: users };
-  }, { fetchUsers: _actions.fetchUsers })(UsersPage)
+  }, { fetchUsers: _actions.fetchUsers })(UsersPage),
+  loadData: function loadData(_ref3) {
+    var dispatch = _ref3.dispatch;
+    return dispatch((0, _actions.fetchUsers)());
+  }
 };
 
 /***/ }),
@@ -39145,6 +39146,8 @@ var _reactRouterConfig = __webpack_require__(423);
 
 var _components = __webpack_require__(484);
 
+var _actions = __webpack_require__(457);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App(_ref) {
@@ -39159,7 +39162,11 @@ var App = function App(_ref) {
 };
 
 exports.default = {
-  component: App
+  component: App,
+  loadData: function loadData(_ref2) {
+    var dispatch = _ref2.dispatch;
+    return dispatch((0, _actions.fetchCurrentUser)());
+  }
 };
 
 /***/ }),
@@ -39197,11 +39204,16 @@ var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(444);
+
 var _reactRouterDom = __webpack_require__(398);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function () {
+var Header = function Header(_ref) {
+  var auth = _ref.auth;
+
+  console.log('my auth status is: ' + auth);
   return _react2.default.createElement(
     'div',
     null,
@@ -39212,6 +39224,11 @@ exports.default = function () {
     )
   );
 };
+
+exports.default = (0, _reactRedux.connect)(function (_ref2) {
+  var auth = _ref2.auth;
+  return { auth: auth };
+})(Header);
 
 /***/ }),
 /* 486 */

@@ -24,6 +24,6 @@ class UsersPage extends Component {
 }
 
 export default {
-  loadData: (store) => store.dispatch(fetchUsers()),
-  component: connect(({ users }) => ({ users}), { fetchUsers })(UsersPage)
+  component: connect(({ users }) => ({ users}), { fetchUsers })(UsersPage),
+  loadData: ({ dispatch }) => dispatch(fetchUsers())
 };
