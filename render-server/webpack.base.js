@@ -1,6 +1,7 @@
 module.exports = {
   // Tell webpack to run babel on every file, ES6 > ES5
   module: {
+    devtool: '#eval-source-map',
     rules: [{ 
         // Only run babel on JS files
         test: /\.js?$/,

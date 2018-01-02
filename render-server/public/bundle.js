@@ -38995,7 +38995,7 @@ exports.default = [_extends({}, _app2.default, {
     exact: true
   }), _extends({}, _pages.UsersListPage, {
     path: '/users'
-  })]
+  }), _extends({}, _pages.NotFoundPage)]
 })];
 
 /***/ }),
@@ -39008,7 +39008,7 @@ exports.default = [_extends({}, _app2.default, {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.UsersListPage = exports.HomePage = undefined;
+exports.NotFoundPage = exports.UsersListPage = exports.HomePage = undefined;
 
 var _homePage = __webpack_require__(480);
 
@@ -39018,10 +39018,15 @@ var _usersListPage = __webpack_require__(481);
 
 var _usersListPage2 = _interopRequireDefault(_usersListPage);
 
+var _notFoundPage = __webpack_require__(487);
+
+var _notFoundPage2 = _interopRequireDefault(_notFoundPage);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.HomePage = _homePage2.default;
 exports.UsersListPage = _usersListPage2.default;
+exports.NotFoundPage = _notFoundPage2.default;
 
 /***/ }),
 /* 480 */
@@ -39396,6 +39401,40 @@ var Footer = function Footer() {
 };
 
 exports.default = Footer;
+
+/***/ }),
+/* 486 */,
+/* 487 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NotFoundPage = function NotFoundPage() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'center-align', style: { marginTop: '200' } },
+    _react2.default.createElement(
+      'h2',
+      { className: 'grey-text text-darken-4' },
+      'Oops, page not found!'
+    )
+  );
+};
+
+exports.default = {
+  component: NotFoundPage
+};
 
 /***/ })
 /******/ ]);
