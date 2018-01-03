@@ -298,6 +298,13 @@ app.get('*', function (req, res) {
     var route = _ref.route;
 
     return route.loadData ? route.loadData(store) : null;
+  }).map(function (promise) {
+    if (promise) {
+      return new Promise(function (resolve, reject) {
+        // Always resolve inner promise
+        promise.then(resolve).catch(resolve);
+      });
+    }
   });
 
   Promise.all(promises).then(function () {
@@ -665,7 +672,7 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Footer = exports.Header = undefined;
+exports.RequireAuth = exports.Footer = exports.Header = undefined;
 
 var _header = __webpack_require__(20);
 
@@ -675,10 +682,15 @@ var _footer = __webpack_require__(21);
 
 var _footer2 = _interopRequireDefault(_footer);
 
+var _requireAuth = __webpack_require__(34);
+
+var _requireAuth2 = _interopRequireDefault(_requireAuth);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Header = _header2.default;
 exports.Footer = _footer2.default;
+exports.RequireAuth = _requireAuth2.default;
 
 /***/ }),
 /* 20 */
@@ -1140,6 +1152,74 @@ exports.default = {
     var dispatch = _ref3.dispatch;
     return dispatch((0, _actions.fetchAdmins)());
   }
+};
+
+/***/ }),
+/* 32 */,
+/* 33 */,
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(4);
+
+var _reactRedux = __webpack_require__(3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+exports.default = function (ChildComponent) {
+  var RequireAuth = function (_Component) {
+    _inherits(RequireAuth, _Component);
+
+    function RequireAuth() {
+      _classCallCheck(this, RequireAuth);
+
+      return _possibleConstructorReturn(this, (RequireAuth.__proto__ || Object.getPrototypeOf(RequireAuth)).apply(this, arguments));
+    }
+
+    _createClass(RequireAuth, [{
+      key: 'render',
+      value: function render() {
+        switch (this.props.auth) {
+          case false:
+            return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+          case null:
+            return _react2.default.createElement(
+              'div',
+              null,
+              'Loading...'
+            );
+          default:
+            return _react2.default.createElement(ChildComponent, this.props);
+        }
+      }
+    }]);
+
+    return RequireAuth;
+  }(_react.Component);
+
+  return (0, _reactRedux.connect)(function (_ref) {
+    var auth = _ref.auth;
+    return { auth: auth };
+  })(RequireAuth);
 };
 
 /***/ })

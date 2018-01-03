@@ -28,6 +28,13 @@ app.get('*', (req, res) => {
 
   const promises = matchRoutes(routes, req.path).map(({ route }) => {
     return route.loadData ? route.loadData(store) : null;
+  }).map(promise => {
+    if (promise) {
+      return new Promise((resolve, reject) => {
+        // Always resolve inner promise
+        promise.then(resolve).catch(resolve);
+      });
+    }
   });
 
   Promise.all(promises).then(() => {
