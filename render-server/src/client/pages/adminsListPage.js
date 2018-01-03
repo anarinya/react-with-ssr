@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchAdmins } from '../actions';
+import { RequireAuth } from '../components';
 
 class AdminsListPage extends Component {
   componentDidMount() {
@@ -37,6 +38,6 @@ class AdminsListPage extends Component {
 }
 
 export default {
-  component: connect(({ admins}) => ({ admins }), { fetchAdmins })(AdminsListPage),
+  component: connect(({ admins }) => ({ admins }), { fetchAdmins })(RequireAuth(AdminsListPage)),
   loadData: ({ dispatch }) => dispatch(fetchAdmins())
 };

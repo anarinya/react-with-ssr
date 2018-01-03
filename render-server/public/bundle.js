@@ -39539,6 +39539,8 @@ var _reactRedux = __webpack_require__(118);
 
 var _actions = __webpack_require__(78);
 
+var _components = __webpack_require__(483);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39623,7 +39625,7 @@ exports.default = {
   component: (0, _reactRedux.connect)(function (_ref2) {
     var admins = _ref2.admins;
     return { admins: admins };
-  }, { fetchAdmins: _actions.fetchAdmins })(AdminsListPage),
+  }, { fetchAdmins: _actions.fetchAdmins })((0, _components.RequireAuth)(AdminsListPage)),
   loadData: function loadData(_ref3) {
     var dispatch = _ref3.dispatch;
     return dispatch((0, _actions.fetchAdmins)());
