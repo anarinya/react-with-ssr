@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 import { fetchUsers } from '../actions';
 
 class UsersPage extends Component {
@@ -22,9 +23,19 @@ class UsersPage extends Component {
     });
   }
 
+  renderMeta() {
+    return (
+      <Helmet>
+        <title>React SSR</title>
+        <meta property="og:title" content="List of users" />
+      </Helmet>
+    );
+  }
+
   render() {
     return (
       <div className="container">
+        {this.renderMeta()}
         <div className="row">
         <h4>Users</h4>
         <div className="row">
