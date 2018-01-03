@@ -311,6 +311,11 @@ app.get('*', function (req, res) {
     var context = {};
     var content = (0, _helpers.renderer)(req, store, context);
 
+    // If redirect received, navigate user to it
+    if (context.url) {
+      return res.redirect(303, context.url);
+    }
+
     // If the notFound route is hit, set server 404 status
     if (context.notFound) {
       res.status(404);

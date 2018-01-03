@@ -41,6 +41,11 @@ app.get('*', (req, res) => {
     const context = {};
     const content = renderer(req, store, context);
 
+    // If redirect received, navigate user to it
+    if (context.url) {
+      return res.redirect(303, context.url);
+    }
+
     // If the notFound route is hit, set server 404 status
     if (context.notFound) {
       res.status(404);
